@@ -1,6 +1,8 @@
-FROM golang:1.26.4 AS builder
+FROM golang:1.26.4 AS development
 
 WORKDIR /home-cloud-backend
+
+RUN go install github.com/air-verse/air@latest
 
 COPY go.mod go.mod ./
 
@@ -8,8 +10,10 @@ RUN go mod download
 
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o /server ./cmd/main.go
+CMD ["air", "-c", ".air.toml"]
 
-EXPOSE 8080
+# RUN CGO_ENABLED=0 GOOS=linux go build -o /server ./cmd/main.go
 
-CMD ["/server"]
+# EXPOSE 8000
+
+# CMD ["/server"]
