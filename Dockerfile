@@ -1,14 +1,12 @@
 FROM golang:1.26.4 AS development
 
-WORKDIR /home-cloud-backend
+WORKDIR /app
+
+COPY ./src .
 
 RUN go install github.com/air-verse/air@latest
 
-COPY go.mod go.mod ./
-
 RUN go mod download 
-
-COPY . .
 
 CMD ["air", "-c", ".air.toml"]
 
