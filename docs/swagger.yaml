@@ -1,0 +1,17 @@
+info:
+  contact: {}
+paths:
+  /api/health:
+    get:
+      description: Returns the health status of the backend
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Check application health
+      tags:
+      - Health
+swagger: "2.0"

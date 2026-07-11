@@ -2,7 +2,7 @@ FROM golang:1.26.4 AS development
 
 WORKDIR /app
 
-COPY ./src .
+COPY . .
 
 RUN go install github.com/air-verse/air@latest
 
