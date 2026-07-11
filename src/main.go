@@ -2,15 +2,25 @@ package main
 
 import (
 	"net/http"
+
+	_ "github.com/twonumberfortyfives/home-cloud-backend/docs"
+
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 func healthHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("OK!!!!!"))
+	w.Write([]byte("OK"))
 }
 
 func main() {
-	http.HandleFunc("/health", healthHandler)
+	mux := http.NewServeMux()
 
-	http.ListenAndServe(":8000", nil)
+	mux.HandleFunc("/api/health", healthHandler)
+
+	mux.Handle("/api/swagger/", httpSwagger.Handler(
+		httpSwagger.URL("http://localhost:8000/api/swagger/doc.json"),
+	))
+
+	http.ListenAndServe(":8000", mux)
 }
