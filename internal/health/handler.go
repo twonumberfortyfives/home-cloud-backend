@@ -14,7 +14,7 @@ func NewHealthHandler(service *HealthService) *HealthHandler {
 
 func (h *HealthHandler) CheckStatus(w http.ResponseWriter, r *http.Request) {
 	status := h.service.CheckStatus()
-
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte(status))
 }
+
