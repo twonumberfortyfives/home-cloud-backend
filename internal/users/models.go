@@ -1,7 +1,8 @@
 package users
 
 type UserDto struct {
-	Firstname string
-	LastName  string
+	Id        string
+	Firstname *string
+	LastName  *string
 	Email     string
 }

@@ -21,5 +21,5 @@ func SwaggerInit() http.HandlerFunc {
 //	@Router			/api/health [get]
 func HealthInit() *health.HealthHandler {
 	healthService := &health.HealthService{}
-	return health.NewHealthHandler(healthService)
+	return health.CreateHealthHandler(healthService)
 }
