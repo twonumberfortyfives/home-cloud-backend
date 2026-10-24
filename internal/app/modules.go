@@ -8,7 +8,7 @@ import (
 )
 
 func SwaggerInit() http.HandlerFunc {
-	return httpSwagger.Handler(httpSwagger.URL("http://localhost:8000/api/swagger/doc.json"))
+	return httpSwagger.Handler(httpSwagger.URL("https://localhost:9000/api/swagger/doc.json"))
 }
 
 // CheckStatus godoc
