@@ -34,6 +34,26 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/api/user": {
+            "get": {
+                "description": "Returns the health status of the backend",
+                "produces": [
+                    "text/plain"
+                ],
+                "tags": [
+                    "Health"
+                ],
+                "summary": "Get Current User",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         }
     }
 }`

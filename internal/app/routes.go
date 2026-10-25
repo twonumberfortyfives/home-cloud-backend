@@ -15,6 +15,13 @@ func RegisterRoutes(mux *http.ServeMux) {
 		),
 	)
 
+	mux.Handle(
+		"GET /api/user",
+		middlewares.AuthorizationMiddleware(
+			http.HandlerFunc(UserInit().GetCurrentUser),
+		),
+	)
+
 	// Swagger endpoint init
 	mux.Handle("/api/swagger/", SwaggerInit())
 }

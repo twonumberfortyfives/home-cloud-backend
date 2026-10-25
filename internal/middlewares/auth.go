@@ -1,10 +1,12 @@
 package middlewares
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"strings"
 
+	"github.com/twonumberfortyfives/home-cloud-backend/internal/users"
 	"google.golang.org/api/idtoken"
 )
 
@@ -28,22 +30,21 @@ func AuthorizationMiddleware(next http.Handler) http.Handler {
 
 		payload, err := idtoken.Validate(r.Context(), tokenStr, audience)
 
+		fmt.Println(err)
+
 		if err != nil {
 			http.Error(w, "Unauthorized", http.StatusUnauthorized)
 			return
 		}
 
 		email, _ := payload.Claims["email"].(string)
-		id, _ := payload.Claims["id"].(string)
 
-		fmt.Println("!!!!!!!!!")
+		user := users.UserDto{
+			Email: email,
+		}
 
-		fmt.Println(email)
+		ctx := context.WithValue(r.Context(), "user", user)
 
-		fmt.Println(payload.Claims)
-
-		_ = id
-
-		next.ServeHTTP(w, r)
+		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }
